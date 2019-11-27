@@ -14,13 +14,14 @@ class BookRepository {
         val service = BookApiService.create()
         service.getBooks().enqueue(object : Callback<List<Book>> {
             override fun onResponse(call: Call<List<Book>>, response: Response<List<Book>>) {
+                data.value = ArrayList()
                 if (response.isSuccessful) {
                     data.value = response.body()
                 }
             }
 
             override fun onFailure(call: Call<List<Book>>, t: Throwable) {
-                data.value = null
+                data.value = ArrayList()
             }
         })
         return data
